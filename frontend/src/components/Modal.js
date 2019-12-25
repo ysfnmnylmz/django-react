@@ -1,77 +1,67 @@
-import React, { Component } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
+import {addTodos} from "../actions/todos";
 
-export default class CustomModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeItem: this.props.activeItem
+export class CustomModal extends Component {
+    state = {
+        title: '',
+        description: '',
     };
-  }
-  handleChange = e => {
-    let { name, value } = e.target;
-    if (e.target.type === "checkbox") {
-      value = e.target.checked;
+    static propTypes = {
+        addTodos: PropTypes.func.isRequired
     }
-    const activeItem = { ...this.state.activeItem, [name]: value };
-    this.setState({ activeItem });
-  };
-  render() {
-    const { toggle, onSave } = this.props;
-    return (
-      <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Yapılacak Görev </ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="title">Başlık</Label>
-              <Input
-                type="text"
-                name="title"
-                value={this.state.activeItem.title}
-                onChange={this.handleChange}
-                placeholder="Görev Başlığı gir"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="description">Tanım</Label>
-              <Input
-                type="text"
-                name="description"
-                value={this.state.activeItem.description}
-                onChange={this.handleChange}
-                placeholder="Görev Tanımı gir"
-              />
-            </FormGroup>
-            <FormGroup check>
-              <Label for="completed">
-                <Input
-                  type="checkbox"
-                  name="completed"
-                  checked={this.state.activeItem.completed}
-                  onChange={this.handleChange}
-                />
-                Tamamlandı
-              </Label>
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-            Kaydet
-          </Button>
-        </ModalFooter>
-      </Modal>
-    );
-  }
+    onChange = e => this.setState({
+        [e.target.name]: e.target.value
+    });
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const {title, description} = this.state;
+        const todo = {title, description};
+        this.props.addTodos(todo);
+    };
+
+    render() {
+        let {title, description} = this.state;
+        return (
+            <div className="card card-body mt-4 mb-4">
+                <h2> Yapılacak Görev </h2>
+                <form>
+                    <div className="form-group">
+                        <label>Başlık</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            name="title"
+                            onChange={this.onChange}
+                            placeholder="Görev Başlığı gir"
+                            value={title}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Tanım</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            name="description"
+                            onChange={this.onChange}
+                            placeholder="Görev Tanımı gir"
+                            value={description}
+                        />
+                    </div>
+                </form>
+                <div className="form-group">
+                    <button
+                        onClick={this.onSubmit}
+                        className="btn btn-primary btn-sm"
+                        type="submit">
+                        Ekle
+                    </button>
+                </div>
+            </div>
+        );
+    }
 }
+
+export default connect(null, {addTodos})(CustomModal);
