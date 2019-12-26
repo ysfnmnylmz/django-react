@@ -37,12 +37,12 @@ export const addTodos = (todo) => dispatch => {
 }
 
 //COMP_TODO
-export const compTodo = (id) => dispatch => {
-    axios.put('http://localhost:8000/api/todos/'+ id)
+export const compTodo = (todo) => dispatch => {
+    axios.put(`http://localhost:8000/api/todos/`+ todo.id +"/", todo )
         .then(res => {
             dispatch({
                 type: COMP_TODO,
-                payload: id
+                payload: todo.id
             });
         }).catch(err => console.log(err));
 }

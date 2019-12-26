@@ -7,6 +7,7 @@ export class CustomModal extends Component {
     state = {
         title: '',
         description: '',
+        completed: false,
     };
     static propTypes = {
         addTodos: PropTypes.func.isRequired
@@ -17,13 +18,13 @@ export class CustomModal extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const {title, description} = this.state;
-        const todo = {title, description};
+        const {title, description, completed} = this.state;
+        const todo = {title, description, completed};
         this.props.addTodos(todo);
     };
 
     render() {
-        let {title, description} = this.state;
+        let {title, description, completed} = this.state;
         return (
             <div className="card card-body mt-4 mb-4">
                 <h2> Yapılacak Görev </h2>

@@ -24,6 +24,7 @@ export class Todos extends Component {
                     <tr>
                         <th>Başlık</th>
                         <th>Tanım</th>
+                        <th>Tamamlandı?</th>
                         <th>Aksiyonlar</th>
                     </tr>
                     </thead>
@@ -32,11 +33,13 @@ export class Todos extends Component {
                         <tr key={todo.id}>
                             <td>{todo.title}</td>
                             <td>{todo.description}</td>
+                            <td>{todo.completed ? "Evet" : "Hayır"}</td>
                             <td>
                                 <button className="btn btn-success btn-sm mr-2">Düzenle</button>
                                 <button
-                                    onClick={this.props.compTodo.bind(this, todo.id)}
-                                    className="btn btn-warning btn-sm mr-2">Tamamlandı</button>
+                                    onClick={this.props.compTodo.bind(this, todo)}
+                                    className="btn btn-warning btn-sm mr-2">Tamamlandı
+                                </button>
                                 <button
                                     onClick={this.props.deleteTodos.bind(this, todo.id)}
                                     className="btn btn-danger btn-sm mr-2">Sil

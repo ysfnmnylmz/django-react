@@ -24,7 +24,14 @@ export default function (state = initialState, action) {
         case COMP_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo.id !== action.payload)
+                todos: state.todos.map((todo, id) => {
+                    if (action.payload === todo.id) {
+                        return Object.assign({}, todo, {
+                            completed: !todo.completed
+                        })
+                    }
+                    return todo
+                })
             };
         default:
             return state;
