@@ -43,7 +43,6 @@ class App extends Component {
                                 </div>
                                 <ul className="list-group list-group-flush">
                                     <Todos>
-
                                     </Todos>
                                 </ul>
                             </div>

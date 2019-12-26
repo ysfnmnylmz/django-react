@@ -38,7 +38,7 @@ export class Todos extends Component {
                                 <button className="btn btn-success btn-sm mr-2">Düzenle</button>
                                 <button
                                     onClick={this.props.compTodo.bind(this, todo)}
-                                    className="btn btn-warning btn-sm mr-2">Tamamlandı
+                                    className="btn btn-warning btn-sm mr-2">{todo.completed? "Tamamlanmadı" : "Tamamlandı"}
                                 </button>
                                 <button
                                     onClick={this.props.deleteTodos.bind(this, todo.id)}
