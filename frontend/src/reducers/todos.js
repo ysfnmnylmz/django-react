@@ -25,7 +25,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 todos: state.todos.map((todo, id) => {
-                    if (action.payload === todo.id) {
+                    if (action.payload.id === todo.id) {
+                        console.log(action.payload)
                         return Object.assign({}, todo, {
                             completed: !todo.completed
                         })

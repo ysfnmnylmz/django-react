@@ -42,7 +42,7 @@ export const compTodo = (todo) => dispatch => {
         .then(res => {
             dispatch({
                 type: COMP_TODO,
-                payload: todo.id
+                payload: todo
             });
         }).catch(err => console.log(err));
 }
