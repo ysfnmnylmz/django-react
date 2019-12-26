@@ -22,6 +22,7 @@ export const deleteTodos = (id) => dispatch => {
                 type: DELETE_TODOS,
                 payload: id
             });
+            console.log(res);
         }).catch(err => console.log(err));
 }
 
@@ -38,7 +39,11 @@ export const addTodos = (todo) => dispatch => {
 
 //COMP_TODO
 export const compTodo = (todo) => dispatch => {
-    axios.put(`http://localhost:8000/api/todos/`+ todo.id +"/", todo )
+    axios.put(`http://localhost:8000/api/todos/` + todo.id + "/", {
+        title: todo.title,
+        description: todo.description,
+        completed: !todo.completed
+    })
         .then(res => {
             dispatch({
                 type: COMP_TODO,
