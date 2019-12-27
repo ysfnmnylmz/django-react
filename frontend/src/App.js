@@ -7,28 +7,6 @@ import store from "./store";
 import Todos from "./components/Todos";
 
 class App extends Component {
-    displayCompleted = status => {
-        if (status) {
-            return this.setState({viewCompleted: true});
-        }
-        return this.setState({viewCompleted: false});
-    };
-    renderTabList = () => {
-        return (
-            <div className="my-5 tab-list">
-                <span>
-                  Tamamlananlar
-                </span>
-                <span>
-                  Tamamlanmayanlar
-                </span>
-            </div>
-        );
-    };
-    toggle = () => {
-        this.setState({modal: !this.state.modal});
-    };
-
     render() {
         return (
             <Provider store={store}>

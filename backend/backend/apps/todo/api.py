@@ -9,3 +9,4 @@ class TodoView(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = TodoSerializer
+

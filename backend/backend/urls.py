@@ -8,5 +8,5 @@ router.register(r'todos', api.TodoView, 'todo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
 ]
