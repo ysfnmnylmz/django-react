@@ -1,7 +1,6 @@
 import React, {Fragment} from "react";
 import Modal from "./Modal";
 import Todos from "./Todos";
-import Header from "./Header";
 
 export default function Dashboard() {
     return (

@@ -1,8 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
-
-import Todos from "./components/Todos";
-import Modal from "./components/Modal";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/accounts/Login";
