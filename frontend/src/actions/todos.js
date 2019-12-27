@@ -1,10 +1,12 @@
 import axios from 'axios';
+import {tokenConfig} from "./auth";
 
 import {GET_TODOS, DELETE_TODOS, ADD_TODOS, COMP_TODO} from "./types";
 
+
 //GET_TODOS
-export const getTodos = () => dispatch => {
-    axios.get('http://localhost:8000/api/todos/')
+export const getTodos = () => (dispatch, getState) => {
+    axios.get('http://localhost:8000/api/todos/', tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_TODOS,
@@ -15,8 +17,8 @@ export const getTodos = () => dispatch => {
 
 //DELETE_TODOS
 
-export const deleteTodos = (id) => dispatch => {
-    axios.delete('http://localhost:8000/api/todos/' + id)
+export const deleteTodos = (id) => (dispatch, getState) => {
+    axios.delete(`http://localhost:8000/api/todos/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: DELETE_TODOS,
@@ -27,8 +29,8 @@ export const deleteTodos = (id) => dispatch => {
 }
 
 //ADD_TODOS
-export const addTodos = (todo) => dispatch => {
-    axios.post('http://localhost:8000/api/todos/', todo)
+export const addTodos = (todo) => (dispatch, getState) => {
+    axios.post('http://localhost:8000/api/todos/', todo, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: ADD_TODOS,
