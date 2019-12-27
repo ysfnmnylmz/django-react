@@ -1,32 +1,31 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
+import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+
+import Todos from "./components/Todos";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/accounts/Login";
+import Register from "./components/accounts/Register";
+import PrivateRoute from "./components/commons/PrivateRoute";
 
 import {Provider} from 'react-redux';
 import store from "./store";
-import Todos from "./components/Todos";
 
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <main className="content">
-                    <Header/>
-                    <h1 className="text-white text-uppercase text-center my-4">Yapılacaklar Listesi</h1>
-                    <div className="row ">
-                        <div className="col-md-6 col-sm-10 mx-auto p-0">
-                            <div className="card p-3">
-                                <div className="">
-                                    <Modal/>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <Todos>
-                                    </Todos>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+                <Router>
+                    <Fragment>
+                        <Header/>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={Dashboard}/>
+                            <Route exact path="/register" component={Register}/>
+                            <Route exact path="/login" component={Login}/>
+                        </Switch>
+                    </Fragment>
+                </Router>
             </Provider>
         );
     }
