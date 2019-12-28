@@ -7,7 +7,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    GET_ERRORS
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -41,7 +42,16 @@ export const login = (username, password) => dispatch => {
                 type: LOGIN_SUCCESS,
                 payload: res.data
             });
-        }).catch(err => console.log(err));
+        }).catch(err => {
+        const errors = {
+            msg: err.response.data,
+            status: err.response.status
+        };
+        dispatch({
+            type: GET_ERRORS,
+            payload: errors
+        });
+    });
 };
 // Register User
 export const register = ({username, password, email}) => dispatch => {
@@ -60,7 +70,16 @@ export const register = ({username, password, email}) => dispatch => {
                 type: REGISTER_SUCCESS,
                 payload: res.data
             });
-        }).catch(err => console.log(err));
+        }).catch(err => {
+        const errors = {
+            msg: err.response.data,
+            status: err.response.status
+        };
+        dispatch({
+            type: GET_ERRORS,
+            payload: errors
+        });
+    });
 };
 
 // LOGOUT USER

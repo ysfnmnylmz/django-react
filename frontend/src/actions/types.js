@@ -1,6 +1,9 @@
 export const GET_TODOS = "GET_TODOS";
 export const DELETE_TODOS = "DELETE_TODOS";
 export const ADD_TODOS = "ADD_TODOS";
+export const GET_ERRORS = "GET_ERRORS";
+export const GET_TODO_MESSAGES = "GET_TODO_MESSAGES";
+export const CREATE_TODO_MESSAGE = "CREATE_TODO_MESSAGE";
 export const COMP_TODO = "COMP_TODO";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
