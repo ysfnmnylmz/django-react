@@ -6,11 +6,11 @@ import PropTypes from "prop-types";
 export class Alerts extends Component {
     static propTypes = {
         error: PropTypes.object.isRequired,
-        message: PropTypes.object.isRequired,
+        todo_message: PropTypes.object.isRequired,
     };
 
     componentDidUpdate(prevProps) {
-        const {error, alert, message} = this.props;
+        const {error, alert, todo_message} = this.props;
         if (error !== prevProps.error) {
             if(error.msg.title) alert.error(`Görev başlığı: ${error.msg.title.join()}`);
             if(error.msg.description) alert.error(`Görev tanımı: ${error.msg.description.join()}`);
@@ -19,9 +19,9 @@ export class Alerts extends Component {
             if(error.msg.non_field_errors) alert.error(`Hata! Şifreniz veya kullanıcı adınız hatalı lütfen tekrar deneyiniz.`);
         }
 
-        if(message !== prevProps.message){
-            if(message.todoAdded) alert.success(message.todoAdded);
-            if(message.todoDeleted) alert.success(message.todoDeleted);
+        if(todo_message !== prevProps.todo_message){
+            if(todo_message.todoAdded) alert.success(todo_message.todoAdded);
+            if(todo_message.todoDeleted) alert.success(todo_message.todoDeleted);
         }
     }
 
@@ -32,6 +32,6 @@ export class Alerts extends Component {
 
 const mapStateToProps = state => ({
     error: state.errors,
-    message: state.todo_messages
+    todo_message: state.todo_messages
 });
 export default connect(mapStateToProps)(withAlert()(Alerts));

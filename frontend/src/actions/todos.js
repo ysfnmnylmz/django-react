@@ -5,7 +5,6 @@ import {GET_TODOS, DELETE_TODOS, ADD_TODOS, COMP_TODO, GET_ERRORS} from "./types
 import {createTodoMessage} from "./todo_messages";
 
 
-
 //GET_TODOS
 export const getTodos = () => (dispatch, getState) => {
     axios.get('http://localhost:8000/api/todos/', tokenConfig(getState))
@@ -71,12 +70,12 @@ export const addTodos = (todo) => (dispatch, getState) => {
 }
 
 //COMP_TODO
-export const compTodo = (todo) => dispatch => {
-    axios.put(`http://localhost:8000/api/todos/` + todo.id + "/", {
+export const compTodo = (todo) => (dispatch, getState) => {
+    axios.put(`http://localhost:8000/api/todos/${todo.id}/`, {
         title: todo.title,
         description: todo.description,
         completed: !todo.completed
-    })
+    }, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: COMP_TODO,
